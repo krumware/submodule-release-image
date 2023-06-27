@@ -24,8 +24,8 @@ jobs:
       #   run: |
       #     git submodule update --init
       
-      - name: "Determine tag"
-        run: "echo \"RELEASE_TAG=${GITHUB_REF#refs/tags/}\" >> $GITHUB_ENV"
+      # - name: "Determine tag"
+      #   run: "echo \"RELEASE_TAG=${GITHUB_REF#refs/tags/}\" >> $GITHUB_ENV"
 
       - name: "Create release"
         uses: "actions/github-script@v6"
@@ -36,12 +36,12 @@ jobs:
               const response = await github.rest.repos.createRelease({
                 draft: false,
                 generate_release_notes: true,
-                name: "${{ inputs.RELEASE_TAG }}",
+                name: ${{ inputs.RELEASE_TAG }},
                 target_commitish: 'main',
                 owner: context.repo.owner,
                 prerelease: false,
                 repo: context.repo.repo,
-                tag_name: "${{ inputs.RELEASE_TAG }}",
+                tag_name: ${{ inputs.RELEASE_TAG }},
               });
 
               core.exportVariable('RELEASE_ID', response.data.id);
