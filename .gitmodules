@@ -1,3 +1,4 @@
 [submodule "submodule-release-source"]
 	path = submodule-release-source
-	url = https://www.github.com/krumware/submodule-release-source.git
+	url = https://github.com/krumware/submodule-release-source.git
+	branch = main
