@@ -21,9 +21,14 @@ jobs:
           token: ${{ secrets.ACTIONS_ACCESS_TOKEN }}
           submodules: true
 
-      # - name: Git submodule update
-      #   run: |
-      #     git submodule update --init
+      - name: Git submodule update
+        run: |
+          git submodule update --init
+          git checkout -b 'release-${{ inputs.RELEASE_TAG }}'
+          (cd submodule-release-source && git checkout '${{ inputs.RELEASE_TAG }}')
+          git add submodule-release-source
+          git commit -m "tag version Cal.com version ${{ inputs.RELEASE_TAG }}"
+          git push origin 'release-${{ inputs.RELEASE_TAG }}'
       
       # - name: "Determine tag"
       #   run: "echo \"RELEASE_TAG=${GITHUB_REF#refs/tags/}\" >> $GITHUB_ENV"
@@ -38,7 +43,7 @@ jobs:
                 draft: false,
                 generate_release_notes: true,
                 name: '${{ inputs.RELEASE_TAG }}',
-                target_commitish: 'main',
+                target_commitish: release-'${{ inputs.RELEASE_TAG }}',
                 owner: context.repo.owner,
                 prerelease: false,
                 repo: context.repo.repo,
