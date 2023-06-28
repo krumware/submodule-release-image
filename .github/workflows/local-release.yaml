@@ -45,7 +45,7 @@ jobs:
                 draft: false,
                 generate_release_notes: true,
                 name: '${{ inputs.RELEASE_TAG }}',
-                target_commitish: release-'${{ inputs.RELEASE_TAG }}',
+                target_commitish: 'release-${{ inputs.RELEASE_TAG }}',
                 owner: context.repo.owner,
                 prerelease: false,
                 repo: context.repo.repo,
