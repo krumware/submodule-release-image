@@ -23,6 +23,8 @@ jobs:
 
       - name: Git submodule update
         run: |
+          git config user.email "actions@github.com"
+          git config user.name "actions-user"
           git submodule update --init
           git checkout -b 'release-${{ inputs.RELEASE_TAG }}'
           (cd submodule-release-source && git checkout '${{ inputs.RELEASE_TAG }}')
