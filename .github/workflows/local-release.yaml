@@ -35,13 +35,13 @@ jobs:
             try {
               const response = await github.rest.repos.createRelease({
                 draft: false,
-                generate_release_notes: true,
-                name: ${{ inputs.RELEASE_TAG }},
+                name: 'v1.0.0',
                 target_commitish: 'main',
+                body: 'this is a test',
                 owner: context.repo.owner,
                 prerelease: false,
                 repo: context.repo.repo,
-                tag_name: ${{ inputs.RELEASE_TAG }},
+                tag_name: 'v1.0.0'
               });
 
               core.exportVariable('RELEASE_ID', response.data.id);
